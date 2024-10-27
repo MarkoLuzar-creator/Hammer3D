@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "system_error": "cpp",
+        "windowsx.h": "c",
+        "*.rh": "c"
+    }
+}
