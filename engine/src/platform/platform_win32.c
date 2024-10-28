@@ -1,6 +1,6 @@
 #include "platform.h"
 
-#if KPLATFORM_WINDOWS == 1
+#ifdef KPLATFORM_WINDOWS
 
 #include <windows.h>
 #include <windowsx.h>
@@ -62,7 +62,7 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
     return DefWindowProcA(hwnd, msg, w_param, l_param);
 }
 
-KAPI b8 platform_startup(platform_state *plat_state, const char *application_name, u16 x, u16 y, u16 width, u16 height)
+b8 platform_startup(platform_state *plat_state, const char *application_name, u16 x, u16 y, u16 width, u16 height)
 {
     internal_state *i_state = malloc(sizeof(internal_state));
     plat_state->internal_state = i_state;

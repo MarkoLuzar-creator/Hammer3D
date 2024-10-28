@@ -2,6 +2,9 @@
     "files.associations": {
         "system_error": "cpp",
         "windowsx.h": "c",
-        "*.rh": "c"
+        "*.rh": "c",
+        "iosfwd": "c",
+        "xlocbuf": "c",
+        "platform.h": "c"
     }
 }
