@@ -1,35 +1,41 @@
 #include "core/application.h"
-#include "core/logger.h"
 #include "game_types.h"
+#include "core/memory.h"
+#include "core/logger.h"
 
-extern b8 create_game(game *out_game);
+extern b8 create_game(game* out_game);
 
 int main()
 {
+
+    initialize_memory();
+
     game game_inst;
     if (!create_game(&game_inst))
     {
-        KFATAL("Could not create game!");
+        MFATAL("Could not create game!");
         return -1;
     }
 
     if (!game_inst.render || !game_inst.update || !game_inst.initialize || !game_inst.on_resize || !game_inst.update)
     {
-        KFATAL("The game's function pointers must be assigned!");
+        MFATAL("The game's function pointers must be assigned!");
         return -2;
     }
 
     if(!application_create(&game_inst))
     {
-        KINFO("Application failed to create!");
+        MINFO("Application failed to create!");
         return 1;
     }
 
     if(!application_run())
     {
-        KINFO("Application did not shutdown gracefully!");
+        MINFO("Application did not shutdown gracefully!");
         return 2;
     }
+
+    shutdown_memory();
 
     return 0;
 }

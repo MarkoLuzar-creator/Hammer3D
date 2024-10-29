@@ -25,32 +25,32 @@ typedef enum
 b8 initialize_logging();
 void shutdown_logging();
 
-KAPI void log_output(log_level level, const char *msg, ...);
+MAPI void log_output(log_level level, const char *msg, ...);
 
-#define KFATAL(msg, ...) log_output(LOG_LEVEL_FETAL, msg, ##__VA_ARGS__);
+#define MFATAL(msg, ...) log_output(LOG_LEVEL_FETAL, msg, ##__VA_ARGS__);
 
-#define KERROR(msg, ...) log_output(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
+#define MERROR(msg, ...) log_output(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
 
 #if LOG_WARNING_ENABLED == 1
-#define KWARNING(msg, ...) log_output(LOG_LEVEL_WARNING, msg, ##__VA_ARGS__);
+#define MWARNING(msg, ...) log_output(LOG_LEVEL_WARNING, msg, ##__VA_ARGS__);
 #else
-#define KWARNING(msg, ...);
+#define MWARNING(msg, ...);
 #endif
 
 #if LOG_INFO_ENABLED == 1
-#define KINFO(msg, ...) log_output(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
+#define MINFO(msg, ...) log_output(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
 #else
-#define KINFO(msg, ...);
+#define MINFO(msg, ...);
 #endif
 
 #if LOG_DEBUG_ENABLED == 1
-#define KDEBUG(msg, ...) log_output(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
+#define MDEBUG(msg, ...) log_output(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
 #else
-#define KDEBUG(msg, ...);
+#define MDEBUG(msg, ...);
 #endif
 
 #if LOG_TRACE_ENABLED == 1
-#define KTRACE(msg, ...) log_output(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
+#define MTRACE(msg, ...) log_output(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
 #else
-#define KTRACE(msg, ...);
+#define MTRACE(msg, ...);
 #endif

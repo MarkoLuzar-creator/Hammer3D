@@ -12,9 +12,9 @@
 #define debugBreak() __builtin_trap()
 #endif
 
-KAPI void report_assertion_failure(const char* expression, const char* message, const char* file, i32 line);
+MAPI void report_assertion_failure(const char* expression, const char* message, const char* file, i32 line);
 
-#define KASSERT(expr)                                                   \
+#define MASSERT(expr)                                                   \
     {                                                                   \
         if (expr)                                                       \
         {                                                               \
@@ -28,7 +28,7 @@ KAPI void report_assertion_failure(const char* expression, const char* message, 
     }                                                                   
 
 
-#define KASSERT_MSG(expr, message)                                                   \
+#define MASSERT_MSG(expr, message)                                                   \
     {                                                                                \
         if (expr)                                                                    \
         {                                                                            \
@@ -42,7 +42,7 @@ KAPI void report_assertion_failure(const char* expression, const char* message, 
     }                                                                                
 
 #ifdef _DEBUG
-#define KASSERT_DEBUG(expr, message)                                                 \
+#define MASSERT_DEBUG(expr, message)                                                 \
     {                                                                                \
         if (expr)                                                                    \
         {                                                                            \
@@ -55,11 +55,11 @@ KAPI void report_assertion_failure(const char* expression, const char* message, 
         }                                                                            \
     }                                                                                
 #else
-#define KASSERT_DEBUG(expr)
+#define MASSERT_DEBUG(expr)
 #endif
 
 #else
-#define KASSERT(expr)
-#define KASSERT_MSG(expr, message)
-#define KASSRT_DEBUG(expr)
+#define MASSERT(expr)
+#define MASSERT_MSG(expr, message)
+#define MASSRT_DEBUG(expr)
 #endif

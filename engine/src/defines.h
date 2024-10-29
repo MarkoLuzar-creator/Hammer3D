@@ -37,30 +37,30 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #define FALSE 0
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
-#define KPLATFORM_WINDOWS
+#define MPLATFORM_WINDOWS
 #ifndef _WIN64
 #error "64-bit is required on Windows!"
 #endif
 
 #elif defined(__linux__) || defined(__gnu_linux__)
-#define KPLATFORM_LINUX
+#define MPLATFORM_LINUX
 #if defined(__ANDROID__)
-#define KPLATFORM_ANDROID
+#define MPLATFORM_ANDROID
 #endif
 
 #elif defined(__unix__)
-#define KPLATFORM_UNIX
+#define MPLATFORM_UNIX
 #elif defined(_POSIX_VERSION)
-#define KPLATFORM_POSIX
+#define MPLATFORM_POSIX
 
 #elif __APPLE__
-#define KPLATFORM_APPLE
+#define MKPLATFORM_APPLE
 #include <TargetConditionals.h>
 #if TARGET_IPHONE_SIMULATOR
-#define KPLATFORM_IOS
-#define KPLATFORM_IOS_SIMULATOR
+#define MPLATFORM_IOS
+#define MPLATFORM_IOS_SIMULATOR
 #elif TARGET_OS_IPHONE
-#define KPLATFORM_IOS
+#define MPLATFORM_IOS
 #elif TARGET_OS_MAC
 #else
 #error "Unknown Apple platform"
@@ -71,15 +71,15 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 
 #ifdef KEXPORT
 #ifdef _MSC_VER
-#define KAPI __declspec(dllexport)
+#define MAPI __declspec(dllexport)
 #else
-#define KAPI __attribute__((visibility("default")))
+#define MAPI __attribute__((visibility("default")))
 #endif
 #else
 // Imports
 #ifdef _MSC_VER
-#define KAPI __declspec(dllimport)
+#define MAPI __declspec(dllimport)
 #else
-#define KAPI
+#define MAPI
 #endif
 #endif

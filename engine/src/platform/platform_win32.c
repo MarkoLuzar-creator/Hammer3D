@@ -1,6 +1,6 @@
 #include "platform.h"
 
-#ifdef KPLATFORM_WINDOWS
+#ifdef MPLATFORM_WINDOWS
 
 #include <windows.h>
 #include <windowsx.h>
@@ -85,7 +85,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name, u1
     if(!RegisterClassA(&wc))
     {
         MessageBoxA(0, "Window registration failed!", "Error", MB_ICONEXCLAMATION | MB_OK);
-        KFATAL("Window registration failed!");
+        MFATAL("Window registration failed!");
         return FALSE;
     }
 
@@ -108,7 +108,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name, u1
     if (!handle)
     {
         MessageBoxA(NULL, "Window creation failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
-        KFATAL("Window creation failed!");
+        MFATAL("Window creation failed!");
         return FALSE;
     } 
 
