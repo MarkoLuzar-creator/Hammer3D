@@ -1,4 +1,5 @@
 #pragma once
+
 #include "defines.h"
 
 typedef enum memory_tag
@@ -23,18 +24,18 @@ typedef enum memory_tag
     MEMORY_TAG_MAX_TAGS
 } memory_tag;
 
-MAPI void initialize_memory();
+MOJAPI void initialize_memory();
 
-MAPI void shutdown_memory();
+MOJAPI void shutdown_memory();
 
-MAPI void* mallocate(u64 size, memory_tag tag);
+MOJAPI void* mallocate(u64 size, memory_tag tag);
 
-MAPI void mfree(void* block, u64 size, memory_tag tag);
+MOJAPI void mfree(void* block, u64 size, memory_tag tag);
 
-MAPI void* mzero_memory(void* block, u64 size);
+MOJAPI void* mzero_memory(void* block, u64 size);
 
-MAPI void* mcopy_memory(void* dest, const void* source, u64 size);
+MOJAPI void* mcopy_memory(void* dest, const void* source, u64 size);
 
-MAPI void* mset_memory(void* dest, i32 value, u64 size);
+MOJAPI void* mset_memory(void* dest, i32 value, u64 size);
 
-MAPI char* get_memory_usage_str();
+MOJAPI char* get_memory_usage_str();

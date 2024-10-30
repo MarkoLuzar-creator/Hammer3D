@@ -17,21 +17,21 @@ typedef struct event_context
         i16 i16[8];
         u16 u16[8];
 
-        char c[16];
+        i8 i8[16];
+        u8 u8[16];
     } data;
 } event_context;
 
+b8 initialize_event();
+void shutdown_event();
+
 typedef b8 (*PFN_on_event)(u16 code, void* sender, void* listener_inst, event_context data);
 
-b8 event_initialize();
+MOJAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
 
-void event_shutdown();
+MOJAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
 
-MAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
-
-MAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
-
-MAPI b8 event_fire(u16 code, void* sender, event_context context);
+MOJAPI b8 event_fire(u16 code, void* sender, event_context context);
 
 typedef enum system_event_code
 {
@@ -39,7 +39,7 @@ typedef enum system_event_code
     EVENT_CODE_KEY_PRESSED = 0x02,
     EVENT_CODE_KEY_RELEASED = 0x03,
     EVENT_CODE_BUTTON_PRESSED = 0x04,
-    EVENT_CODE_BUTTON_REALESED = 0x05,
+    EVENT_CODE_BUTTON_RELEASED = 0x05,
     EVENT_CODE_MOUSE_MOVED = 0x06,
     EVENT_CODE_MOUSE_WHEEL = 0x07,
     EVENT_CODE_RESIZED = 0x08,

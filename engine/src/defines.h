@@ -21,7 +21,6 @@ typedef char b8;
 #else
 #define STATIC_ASSERT static_assert
 #endif
-
 STATIC_ASSERT(sizeof(u8) == 1, "Expected u8 to be 1 byte.");
 STATIC_ASSERT(sizeof(u16) == 2, "Expected u16 to be 2 bytes.");
 STATIC_ASSERT(sizeof(u32) == 4, "Expected u32 to be 4 bytes.");
@@ -37,30 +36,27 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #define FALSE 0
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) 
-#define MPLATFORM_WINDOWS
+#define PLATFORM_WINDOWS
 #ifndef _WIN64
 #error "64-bit is required on Windows!"
 #endif
-
 #elif defined(__linux__) || defined(__gnu_linux__)
-#define MPLATFORM_LINUX
+#define PLATFORM_LINUX
 #if defined(__ANDROID__)
-#define MPLATFORM_ANDROID
+#define PLATFORM_ANDROID
 #endif
-
 #elif defined(__unix__)
-#define MPLATFORM_UNIX
+#define PLATFORM_UNIX
 #elif defined(_POSIX_VERSION)
-#define MPLATFORM_POSIX
-
+#define PLATFORM_POSIX
 #elif __APPLE__
 #define MKPLATFORM_APPLE
 #include <TargetConditionals.h>
 #if TARGET_IPHONE_SIMULATOR
-#define MPLATFORM_IOS
-#define MPLATFORM_IOS_SIMULATOR
+#define PLATFORM_IOS
+#define PLATFORM_IOS_SIMULATOR
 #elif TARGET_OS_IPHONE
-#define MPLATFORM_IOS
+#define PLATFORM_IOS
 #elif TARGET_OS_MAC
 #else
 #error "Unknown Apple platform"
@@ -69,17 +65,16 @@ STATIC_ASSERT(sizeof(f64) == 8, "Expected f64 to be 8 bytes.");
 #error "Unknown platform!"
 #endif
 
-#ifdef KEXPORT
+#ifdef MOJEXPORT
 #ifdef _MSC_VER
-#define MAPI __declspec(dllexport)
+#define MOJAPI __declspec(dllexport)
 #else
-#define MAPI __attribute__((visibility("default")))
+#define MOJAPI __attribute__((visibility("default")))
 #endif
 #else
-// Imports
 #ifdef _MSC_VER
-#define MAPI __declspec(dllimport)
+#define MOJAPI __declspec(dllimport)
 #else
-#define MAPI
+#define MOJAPI
 #endif
 #endif

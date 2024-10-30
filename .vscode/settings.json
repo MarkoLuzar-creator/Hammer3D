@@ -5,6 +5,7 @@
         "*.rh": "c",
         "iosfwd": "c",
         "xlocbuf": "c",
-        "platform.h": "c"
+        "platform.h": "c",
+        "xlocale": "cpp"
     }
 }

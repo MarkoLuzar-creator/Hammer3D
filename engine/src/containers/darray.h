@@ -10,26 +10,25 @@ enum
     DARRAY_FIELD_LENGTH
 };
 
-MAPI void* _darray_create(u64 length, u64 stride);
+MOJAPI void* _darray_create(u64 length, u64 stride);
 
-MAPI void _darray_destroy(void* array);
+MOJAPI void _darray_destroy(void* array);
 
-MAPI u64 _darray_field_get(void* array, u64 field);
+MOJAPI u64 _darray_field_get(void* array, u64 field);
 
-MAPI void _darray_field_set(void* array, u64 field, u64 value);
+MOJAPI void _darray_field_set(void* array, u64 field, u64 value);
 
-MAPI void* _darray_resize(void* array);
+MOJAPI void* _darray_resize(void* array);
 
-MAPI void* _darray_push(void* array, const void* value_ptr);
+MOJAPI void* _darray_push(void* array, const void* value_ptr);
 
-MAPI void _darray_pop(void* array, void* dest);
+MOJAPI void _darray_pop(void* array, void* dest);
 
-MAPI void* _darray_pop_at(void* array, u64 index, void* dest);
+MOJAPI void* _darray_pop_at(void* array, u64 index, void* dest);
 
-MAPI void* _darray_insert_at(void* array, u64 index, void* value_ptr);
+MOJAPI void* _darray_insert_at(void* array, u64 index, void* value_ptr);
 
 #define DARRAY_DEFAULT_CAPACITY 1
-
 #define DARRAY_RESIZE_FACTOR 2
 
 #define darray_create(type) _darray_create(DARRAY_DEFAULT_CAPACITY, sizeof(type))

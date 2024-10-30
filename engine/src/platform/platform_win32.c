@@ -1,14 +1,15 @@
 #include "platform.h"
 
-#ifdef MPLATFORM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 #include <windows.h>
 #include <windowsx.h>
+
 #include <stdlib.h>
 
 #include "core/logger.h"
 
-typedef struct
+typedef struct internal_state
 {
     HINSTANCE h_instance;
     HWND hwnd;
@@ -62,7 +63,7 @@ LRESULT CALLBACK win32_process_message(HWND hwnd, u32 msg, WPARAM w_param, LPARA
     return DefWindowProcA(hwnd, msg, w_param, l_param);
 }
 
-b8 platform_startup(platform_state *plat_state, const char *application_name, u16 x, u16 y, u16 width, u16 height)
+b8 platform_startup(platform_state* plat_state, const char* application_name, u16 x, u16 y, u16 width, u16 height)
 {
     internal_state *i_state = malloc(sizeof(internal_state));
     plat_state->internal_state = i_state;
@@ -85,7 +86,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name, u1
     if(!RegisterClassA(&wc))
     {
         MessageBoxA(0, "Window registration failed!", "Error", MB_ICONEXCLAMATION | MB_OK);
-        MFATAL("Window registration failed!");
+        MOJFATAL("Window registration failed!");
         return FALSE;
     }
 
@@ -108,7 +109,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name, u1
     if (!handle)
     {
         MessageBoxA(NULL, "Window creation failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
-        MFATAL("Window creation failed!");
+        MOJFATAL("Window creation failed!");
         return FALSE;
     } 
 
@@ -124,7 +125,7 @@ b8 platform_startup(platform_state *plat_state, const char *application_name, u1
     return TRUE;
 }
 
-void platform_shutdown(platform_state *plat_state)
+void platform_shutdown(platform_state* plat_state)
 {
     internal_state *i_state = plat_state->internal_state;
     if (i_state->hwnd)
@@ -134,7 +135,7 @@ void platform_shutdown(platform_state *plat_state)
     }
 }
 
-b8 platform_pump_messages(platform_state *plat_state)
+b8 platform_pump_messages(platform_state* plat_state)
 {
     MSG message;
     while(PeekMessageA(&message, NULL, 0, 0, PM_REMOVE))
@@ -150,27 +151,27 @@ void* platform_allocate(u64 size, b8 aligned)
     return malloc(size);
 }
 
-void platform_free(void *block, b8 aligned)
+void platform_free(void* block, b8 aligned)
 {
     free(block);
 }
 
-void* platform_zero_memory(void *block, u64 size)
+void* platform_zero_memory(void* block, u64 size)
 {
     return memset(block, 0, size);
 }
 
-void* platform_copy_memory(void *dest, const void *source, u64 size)
+void* platform_copy_memory(void* dest, const void *source, u64 size)
 {
     return memcpy(dest, 0, size);
 }
 
-void* platform_set_memory(void *dest, i32 value, u64 size)
+void* platform_set_memory(void* dest, i32 value, u64 size)
 {
     return memset(dest, value, size);
 }
 
-void platform_console_write(const char *msg, u8 colour)
+void platform_console_write(const char* msg, u8 colour)
 {
     HANDLE console_handle = GetStdHandle(STD_OUTPUT_HANDLE);
     static u8 levels[6] = {64, 4, 6, 2, 1, 8};
@@ -180,7 +181,7 @@ void platform_console_write(const char *msg, u8 colour)
     WriteConsoleA(GetStdHandle(STD_OUTPUT_HANDLE), msg, (DWORD)strlen(msg), 0, 0);
 }
 
-void platform_console_write_error(const char *msg, u8 colour)
+void platform_console_write_error(const char* msg, u8 colour)
 {
     HANDLE console_handle = GetStdHandle(STD_ERROR_HANDLE);
     static u8 levels[6] = {64, 4, 6, 2, 1, 8};

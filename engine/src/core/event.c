@@ -26,9 +26,9 @@ event_system_state;
 static b8 is_initialized = FALSE;
 static event_system_state state;
 
-b8 event_initialize()
+b8 initialize_event()
 {
-    if (is_initialized == TRUE)
+    if (is_initialized)
     {
         return FALSE;
     }
@@ -42,7 +42,7 @@ b8 event_initialize()
     return TRUE;
 }
 
-void event_shutdown()
+void shutdown_event()
 {
     for (u16 i = 0; i < MAX_MESSAGE_CODES; ++i)
     {

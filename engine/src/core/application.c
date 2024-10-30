@@ -10,6 +10,8 @@
 
 #include "core/event.h"
 
+#include "core/input.h"
+
 typedef struct application_state
 {
     game* game_inst;
@@ -22,33 +24,35 @@ typedef struct application_state
 } application_state;
 
 static b8 initialized = FALSE;
-
 static application_state app_state;
 
 b8 application_create(game* game_inst)
 {
     if(initialized)
     {
-        MERROR("application_create called more than once!");
+        MOJERROR("application_create called more than once!");
         return FALSE;
     }
 
+    initialize_memory();
     initialize_logging();
+    initialize_input();
+    
     
     app_state.game_inst = game_inst;
     app_state.is_running = TRUE;
     app_state.is_suspended = FALSE;
 
-    MFATAL("A test message! %f", 3.24f);
-    MWARNING("A test message! %f", 3.24f);
-    MERROR("A test message! %f", 3.24f);
-    MINFO("A test message! %f", 3.24f);
-    MTRACE("A test message! %f", 3.24f);
-    MDEBUG("A test message! %f", 3.24f);
+    MOJFATAL("A test message! %f", 3.24f);
+    MOJWARING("A test message! %f", 3.24f);
+    MOJERROR("A test message! %f", 3.24f);
+    MOJINFO("A test message! %f", 3.24f);
+    MOJTRACE("A test message! %f", 3.24f);
+    MOJDEBUG("A test message! %f", 3.24f);
 
-    if (!event_initialize())
+    if (!initialize_event())
     {
-        MERROR("Event system failed initialization");
+        MOJERROR("Event system failed initialization");
         return FALSE;
     }
 
@@ -59,7 +63,7 @@ b8 application_create(game* game_inst)
 
     if (!app_state.game_inst->initialize(app_state.game_inst))
     {
-        MFATAL("Game failed to initialize!");
+        MOJFATAL("Game failed to initialize!");
         return FALSE;
     }
 
@@ -73,7 +77,7 @@ b8 application_create(game* game_inst)
 
 b8 application_run()
 {
-    MINFO(get_memory_usage_str());
+    MOJINFO(get_memory_usage_str());
     
     while(app_state.is_running)
     {
@@ -86,23 +90,30 @@ b8 application_run()
         {
             if(!app_state.game_inst->update(app_state.game_inst, 0))
             {
-                MFATAL("Game update failed shutting down!");
+                MOJFATAL("Game update failed shutting down!");
                 app_state.is_running = FALSE;
                 break;
             }
             
             if(!app_state.game_inst->render(app_state.game_inst, (f32)0))
             {
-                MFATAL("Game render failed shutting down!");
+                MOJFATAL("Game render failed shutting down!");
                 app_state.is_running = FALSE;
                 break;
             }
+
+            input_update(0);
         }
     }
 
-    event_shutdown();
+    shutdown_event();
+
+    shutdown_input();
+
+    shutdown_memory();
 
     shutdown_logging();
+    
 
     app_state.is_running = FALSE;
 

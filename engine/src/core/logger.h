@@ -12,45 +12,45 @@
 #define LOG_TRACE_ENABLED 0
 #endif
 
-typedef enum
+typedef enum log_level
 {
-    LOG_LEVEL_FETAL = 0,
-    LOG_LEVEL_ERROR = 1,
-    LOG_LEVEL_WARNING = 2,
-    LOG_LEVEL_INFO = 3,
-    LOG_LEVEL_DEBUG = 4,
-    LOG_LEVEL_TRACE = 5,
+    LOG_LEVEL_FETAL,
+    LOG_LEVEL_ERROR,
+    LOG_LEVEL_WARNING,
+    LOG_LEVEL_INFO,
+    LOG_LEVEL_DEBUG,
+    LOG_LEVEL_TRACE,
 } log_level;
 
 b8 initialize_logging();
 void shutdown_logging();
 
-MAPI void log_output(log_level level, const char *msg, ...);
+MOJAPI void log_output(log_level level, const char* msg, ...);
 
-#define MFATAL(msg, ...) log_output(LOG_LEVEL_FETAL, msg, ##__VA_ARGS__);
+#define MOJFATAL(msg, ...) log_output(LOG_LEVEL_FETAL, msg, ##__VA_ARGS__);
 
-#define MERROR(msg, ...) log_output(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
+#define MOJERROR(msg, ...) log_output(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
 
 #if LOG_WARNING_ENABLED == 1
-#define MWARNING(msg, ...) log_output(LOG_LEVEL_WARNING, msg, ##__VA_ARGS__);
+#define MOJWARING(msg, ...) log_output(LOG_LEVEL_WARNING, msg, ##__VA_ARGS__);
 #else
-#define MWARNING(msg, ...);
+#define MOJWARING(msg, ...);
 #endif
 
 #if LOG_INFO_ENABLED == 1
-#define MINFO(msg, ...) log_output(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
+#define MOJINFO(msg, ...) log_output(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
 #else
-#define MINFO(msg, ...);
+#define MOJINFO(msg, ...);
 #endif
 
 #if LOG_DEBUG_ENABLED == 1
-#define MDEBUG(msg, ...) log_output(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
+#define MOJDEBUG(msg, ...) log_output(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
 #else
-#define MDEBUG(msg, ...);
+#define MOJDEBUG(msg, ...);
 #endif
 
 #if LOG_TRACE_ENABLED == 1
-#define MTRACE(msg, ...) log_output(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
+#define MOJTRACE(msg, ...) log_output(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
 #else
-#define MTRACE(msg, ...);
+#define MOJTRACE(msg, ...);
 #endif

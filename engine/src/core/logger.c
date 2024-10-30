@@ -1,12 +1,16 @@
 #include "logger.h"
+
 #include "asserts.h"
+
 #include "platform/platform.h"
 
 #include <stdio.h>
+
 #include <string.h>
+
 #include <stdarg.h>
 
-void report_assertion_failure(const char *expression, const char *msg, const char *file, i32 line)
+void report_assertion_failure(const char* expression, const char* msg, const char* file, i32 line)
 {
     log_output(LOG_LEVEL_FETAL, "Assertion Failure: %s, message: '%s', in file: %s, line: %d\n", expression, msg, file, line);
 }
@@ -21,9 +25,9 @@ void shutdown_logging()
 
 }
 
-void log_output(log_level level, const char *msg, ...)
+void log_output(log_level level, const char* msg, ...)
 {
-    const char *level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARNING]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "};
+    const char* level_strings[6] = {"[FATAL]: ", "[ERROR]: ", "[WARNING]: ", "[INFO]: ", "[DEBUG]: ", "[TRACE]: "};
     b8 is_error = level < LOG_LEVEL_WARNING;
 
     const i32 msg_lenght = 32000;

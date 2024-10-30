@@ -1,4 +1,5 @@
 #pragma once
+
 #include "defines.h"
 
 struct game;
@@ -12,6 +13,6 @@ typedef struct application_config
     char *name;
 } application_config;
 
-MAPI b8 application_create(struct game *game_inst);
+MOJAPI b8 application_create(struct game* game_inst);
 
-MAPI b8 application_run();
+MOJAPI b8 application_run();

@@ -1,8 +1,11 @@
 #include "memory.h"
+
 #include "core/logger.h"
+
 #include "platform/platform.h"
 
 #include  <string.h>
+
 #include <stdio.h>
 
 struct memory_stats
@@ -47,7 +50,7 @@ void* mallocate(u64 size, memory_tag tag)
 {
     if (tag == MEMORY_TAG_UNKNOWN)
     {
-        MWARNING("mallocate called using MEMORY_TAG_UNKNOWN");
+        MOJWARING("mallocate called using MEMORY_TAG_UNKNOWN");
     }
     stats.total_allocated += size;
     stats.tagged_allocations[tag] += size;
@@ -61,7 +64,7 @@ void mfree(void* block, u64 size, memory_tag tag)
 {
     if (tag == MEMORY_TAG_UNKNOWN)
     {
-        MWARNING("mallocate called using MEMORY_TAG_UNKNOWN");
+        MOJWARING("mallocate called using MEMORY_TAG_UNKNOWN");
     }
     stats.total_allocated -= size;
     stats.tagged_allocations[tag] -= size;
