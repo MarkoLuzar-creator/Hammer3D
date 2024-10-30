@@ -1,8 +1,14 @@
 #include "application.h"
+
 #include "game_types.h"
+
 #include "platform/platform.h"
+
 #include "core/memory.h"
+
 #include "core/logger.h"
+
+#include "core/event.h"
 
 typedef struct application_state
 {
@@ -16,6 +22,7 @@ typedef struct application_state
 } application_state;
 
 static b8 initialized = FALSE;
+
 static application_state app_state;
 
 b8 application_create(game* game_inst)
@@ -38,6 +45,12 @@ b8 application_create(game* game_inst)
     MINFO("A test message! %f", 3.24f);
     MTRACE("A test message! %f", 3.24f);
     MDEBUG("A test message! %f", 3.24f);
+
+    if (!event_initialize())
+    {
+        MERROR("Event system failed initialization");
+        return FALSE;
+    }
 
     if(!platform_startup(&app_state.platform, game_inst->app_config.name, game_inst->app_config.start_pos_x, game_inst->app_config.start_pos_y, game_inst->app_config.start_width, game_inst->app_config.start_height)) 
     {
@@ -86,6 +99,8 @@ b8 application_run()
             }
         }
     }
+
+    event_shutdown();
 
     shutdown_logging();
 
