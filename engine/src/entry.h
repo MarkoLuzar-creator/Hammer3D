@@ -4,10 +4,15 @@
 
 #include "core/logger.h"
 
+#include "core/memory.h"
+
 extern b8 create_game(game* out_game);
 
 int main()
 {
+
+    initialize_memory();
+
     game game_inst;
     if (!create_game(&game_inst))
     {

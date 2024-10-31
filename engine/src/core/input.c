@@ -79,6 +79,7 @@ void input_process_button_mouse_move(i16 x, i16 y)
 {
     if (state.mouse_current.x != x || state.mouse_current.y != y)
     {
+        MOJDEBUG("mouse position: %i, %i!", x, y);
         state.mouse_current.x = x;
         state.mouse_current.y = y;
 
@@ -89,7 +90,7 @@ void input_process_button_mouse_move(i16 x, i16 y)
     }
 }
 
-void input_process_mouse_wheen(i8 z_delta)
+void input_process_mouse_wheel(i8 z_delta)
 {
     event_context context;
     context.data.u8[0] = z_delta;
