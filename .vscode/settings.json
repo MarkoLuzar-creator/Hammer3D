@@ -1,11 +1,14 @@
 {
     "files.associations": {
-        "system_error": "cpp",
+        "test.h": "c",
+        "vulkan.h": "c",
+        "vulkan_core.h": "c",
+        "vk_platform.h": "c",
+        "type_traits": "c",
+        "typeinfo": "c",
         "windowsx.h": "c",
-        "*.rh": "c",
-        "iosfwd": "c",
-        "xlocbuf": "c",
-        "platform.h": "c",
-        "xlocale": "cpp"
+        "vulkan_platform.h": "c",
+        "renderer_frontend.h": "c",
+        "memory.h": "c"
     }
 }

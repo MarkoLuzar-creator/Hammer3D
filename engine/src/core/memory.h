@@ -2,7 +2,7 @@
 
 #include "defines.h"
 
-typedef enum memory_tag
+typedef enum
 {
     MEMORY_TAG_UNKNOWN,
     MEMORY_TAG_ARRAY,
@@ -22,20 +22,15 @@ typedef enum memory_tag
     MEMORY_TAG_ENTITY_NODE,
     MEMORY_TAG_SCENE,
     MEMORY_TAG_MAX_TAGS
-} memory_tag;
+} memory_tags;
 
-MOJAPI void initialize_memory();
+CHEAP_API void memory_initialize();
+CHEAP_API void memory_shutdown();
 
-MOJAPI void shutdown_memory();
+CHEAP_API void* allocate_memory(u64 size, memory_tags tag);
+CHEAP_API void* zero_memory(void* block, u64 size);
+CHEAP_API void* copy_memory(void* dest, const void* source, u64 size);
+CHEAP_API void* set_memory(void* dest, i32 value, u64 size);
+CHEAP_API void free_memory(void* block, u64 size, memory_tags tag);
 
-MOJAPI void* mallocate(u64 size, memory_tag tag);
-
-MOJAPI void mfree(void* block, u64 size, memory_tag tag);
-
-MOJAPI void* mzero_memory(void* block, u64 size);
-
-MOJAPI void* mcopy_memory(void* dest, const void* source, u64 size);
-
-MOJAPI void* mset_memory(void* dest, i32 value, u64 size);
-
-MOJAPI char* get_memory_usage_str();
+CHEAP_API void print_memory_usage();

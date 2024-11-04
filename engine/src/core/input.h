@@ -2,7 +2,7 @@
 
 #include "defines.h"
 
-typedef enum buttons
+typedef enum
 {
     BUTTON_LEFT,
     BUTTON_RIGHT,
@@ -10,7 +10,7 @@ typedef enum buttons
     BUTTON_MAX_BUTTONS
 } buttons;
 
-typedef enum keys 
+typedef enum
 {
     KEY_BACKSPACE = 0x08,
     KEY_ENTER = 0x0D,
@@ -129,24 +129,25 @@ typedef enum keys
     KEYS_MAX_KEYS
 } keys;
 
-void initialize_input();
-void shutdown_input();
+void input_initialize();
+void input_shutdown();
 
 void input_update(f64 delta_time);
 
-MOJAPI b8 input_is_key_down(keys key);
-MOJAPI b8 input_is_key_up(keys key);
-MOJAPI b8 input_was_key_Down(keys key);
-MOJAPI b8 input_was_key_up(keys key);
+CHEAP_API b8 input_is_key_down(keys key);
+CHEAP_API b8 input_is_key_up(keys key);
+CHEAP_API b8 input_was_key_down(keys key);
+CHEAP_API b8 input_was_key_up(keys key);
 
 void input_process_key(keys key, b8 pressed);
 
-MOJAPI b8 input_is_button_down(buttons button);
-MOJAPI b8 input_is_button_up(buttons button);
-MOJAPI b8 input_was_button_down(buttons button);
-MOJAPI b8 input_was_button_up(buttons button);
-MOJAPI void input_get_mouse_position(i32* x, i32* y);
-MOJAPI void input_get_previous_mouse_position(i32* x, i32* y);
+CHEAP_API b8 input_is_button_down(buttons button);
+CHEAP_API b8 input_is_button_up(buttons button);
+CHEAP_API b8 input_was_button_down(buttons button);
+CHEAP_API b8 input_was_button_up(buttons button);
+
+CHEAP_API void input_get_mouse_position(i32* x, i32* y);
+CHEAP_API void input_get_previous_mouse_position(i32* x, i32* y);
 
 void input_process_button(buttons button, b8 pressed);
 void input_process_button_mouse_move(i16 x, i16 y);

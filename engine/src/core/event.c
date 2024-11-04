@@ -23,26 +23,14 @@ typedef struct event_system_state
 }
 event_system_state;
 
-static b8 is_initialized = FALSE;
+static b8 is_initialized = TRUE;
 static event_system_state state;
 
-b8 initialize_event()
+void event_initialize()
 {
-    if (is_initialized)
-    {
-        return FALSE;
-    }
-    
-    is_initialized = FALSE;
-
-    mzero_memory(&state, sizeof(state));
-
-    is_initialized = TRUE;
-
-    return TRUE;
+    zero_memory(&state, sizeof(state));
 }
-
-void shutdown_event()
+void event_shutdown()
 {
     for (u16 i = 0; i < MAX_MESSAGE_CODES; ++i)
     {
@@ -82,8 +70,6 @@ b8 event_register(u16 code, void* listener, PFN_on_event on_event)
 
     return TRUE;
 }
-
-
 b8 event_unregister(u16 code, void* listener, PFN_on_event on_event)
 {
     if (!is_initialized)
@@ -109,7 +95,6 @@ b8 event_unregister(u16 code, void* listener, PFN_on_event on_event)
     }
     return FALSE;
 }
-
 b8 event_fire(u16 code, void* sender, event_context context)
 {
     if (!is_initialized)

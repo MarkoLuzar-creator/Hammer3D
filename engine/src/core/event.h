@@ -22,16 +22,13 @@ typedef struct event_context
     } data;
 } event_context;
 
-b8 initialize_event();
-void shutdown_event();
+void event_initialize();
+void event_shutdown();
 
 typedef b8 (*PFN_on_event)(u16 code, void* sender, void* listener_inst, event_context data);
-
-MOJAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
-
-MOJAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
-
-MOJAPI b8 event_fire(u16 code, void* sender, event_context context);
+CHEAP_API b8 event_register(u16 code, void* listener, PFN_on_event on_event);
+CHEAP_API b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
+CHEAP_API b8 event_fire(u16 code, void* sender, event_context context);
 
 typedef enum system_event_code
 {
