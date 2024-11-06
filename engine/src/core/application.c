@@ -35,7 +35,7 @@ b8 application_create(game* game_inst)
     app_state.is_suspended = FALSE;
 
     memory_initialize();
-    logger_initialize();
+    LoggerInitialize();
     input_initialize();
     event_initialize();
 
@@ -50,7 +50,7 @@ b8 application_create(game* game_inst)
 
     if (!app_state.game_inst->initialize(app_state.game_inst))
     {
-        CHEAP_FATAL("Game failed to initialize");
+        HFATAL("Game failed to initialize");
         return FALSE;
     }
 
@@ -85,14 +85,14 @@ b8 application_run()
 
             if(!app_state.game_inst->update(app_state.game_inst, (f32)delta))
             {
-                CHEAP_FATAL("Game update failed shutting down!");
+                HFATAL("Game update failed shutting down!");
                 app_state.is_running = FALSE;
                 break;
             }
             
             if(!app_state.game_inst->render(app_state.game_inst, (f32)0))
             {
-                CHEAP_FATAL("Game render failed shutting down!");
+                HFATAL("Game render failed shutting down!");
                 app_state.is_running = FALSE;
                 break;
             }
@@ -125,7 +125,7 @@ b8 application_run()
 
     event_shutdown();
     input_shutdown();
-    logger_shutdown();
+    LoggerShutdown();
     memory_shutdown();
     platform_shutdown(&app_state.platform);
 
@@ -140,7 +140,7 @@ b8 application_on_event(u16 code, void* sender, void* listener_inst, event_conte
     {
         case EVENT_CODE_APPLICATION_QUIT: 
         {
-            CHEAP_INFO("aplication quit event");
+            HINFO("aplication quit event");
             app_state.is_running = FALSE;
             return TRUE;
         }
@@ -161,11 +161,11 @@ b8 application_on_key(u16 code, void* sender, void* listener_inst, event_context
         } 
         else if(key_code == KEY_A)
         {
-            CHEAP_DEBUG("a pressed");
+            HDEBUG("a pressed");
         }
         else
         {
-            CHEAP_DEBUG("'%c' key pressed in window: ", key_code);
+            HDEBUG("'%c' key pressed in window: ", key_code);
         }
     }
     else if (code == EVENT_CODE_KEY_RELEASED)
@@ -173,11 +173,11 @@ b8 application_on_key(u16 code, void* sender, void* listener_inst, event_context
         u16 key_code = context.data.u16[0];
         if (key_code == KEY_B)
         {
-            CHEAP_DEBUG("b key released");
+            HDEBUG("b key released");
         }
         else 
         {
-            CHEAP_DEBUG("'%c' key released in window: ", key_code);
+            HDEBUG("'%c' key released in window: ", key_code);
         }
     }
     return FALSE;

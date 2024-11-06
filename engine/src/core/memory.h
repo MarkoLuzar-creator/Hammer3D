@@ -24,13 +24,13 @@ typedef enum
     MEMORY_TAG_MAX_TAGS
 } memory_tags;
 
-CHEAP_API void memory_initialize();
-CHEAP_API void memory_shutdown();
+HAPI void memory_initialize();
+HAPI void memory_shutdown();
 
-CHEAP_API void* allocate_memory(u64 size, memory_tags tag);
-CHEAP_API void* zero_memory(void* block, u64 size);
-CHEAP_API void* copy_memory(void* dest, const void* source, u64 size);
-CHEAP_API void* set_memory(void* dest, i32 value, u64 size);
-CHEAP_API void free_memory(void* block, u64 size, memory_tags tag);
+HAPI void* allocate_memory(u64 size, memory_tags tag);
+HAPI void* zero_memory(void* block, u64 size);
+HAPI void* copy_memory(void* dest, const void* source, u64 size);
+HAPI void* set_memory(void* dest, i32 value, u64 size);
+HAPI void free_memory(void* block, u64 size, memory_tags tag);
 
-CHEAP_API void print_memory_usage();
+HAPI void print_memory_usage();

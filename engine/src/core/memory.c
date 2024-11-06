@@ -23,7 +23,7 @@ void memory_shutdown()
 
 void* allocate_memory(u64 size, memory_tags tag)
 {
-    if (tag == MEMORY_TAG_UNKNOWN) CHEAP_WARN("allocate_memory called using MEMORY_TAG_UNKNOWN!");
+    if (tag == MEMORY_TAG_UNKNOWN) HWARN("allocate_memory called using MEMORY_TAG_UNKNOWN!");
 
     stats.total_allocated += size;
     stats.tagged_allocations[tag] += size;
@@ -47,7 +47,7 @@ void* set_memory(void* dest, i32 value, u64 size)
 }
 void free_memory(void* block, u64 size, memory_tags tag)
 {
-    if (tag == MEMORY_TAG_UNKNOWN) CHEAP_WARN("allocate_memory called using MEMORY_TAG_UNKNOWN!");
+    if (tag == MEMORY_TAG_UNKNOWN) HWARN("allocate_memory called using MEMORY_TAG_UNKNOWN!");
 
     stats.total_allocated -= size;
     stats.tagged_allocations[tag] -= size;
@@ -114,5 +114,5 @@ void print_memory_usage()
         i32 length = snprintf(buffer + strlen(buffer), 8000, "    %s: %.2f%s \n", memory_tag_string[i], ammount, unit);
         offset += length;
     }
-    CHEAP_INFO(buffer);
+    HINFO(buffer);
 }

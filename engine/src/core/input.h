@@ -134,20 +134,20 @@ void input_shutdown();
 
 void input_update(f64 delta_time);
 
-CHEAP_API b8 input_is_key_down(keys key);
-CHEAP_API b8 input_is_key_up(keys key);
-CHEAP_API b8 input_was_key_down(keys key);
-CHEAP_API b8 input_was_key_up(keys key);
+HAPI b8 input_is_key_down(keys key);
+HAPI b8 input_is_key_up(keys key);
+HAPI b8 input_was_key_down(keys key);
+HAPI b8 input_was_key_up(keys key);
 
 void input_process_key(keys key, b8 pressed);
 
-CHEAP_API b8 input_is_button_down(buttons button);
-CHEAP_API b8 input_is_button_up(buttons button);
-CHEAP_API b8 input_was_button_down(buttons button);
-CHEAP_API b8 input_was_button_up(buttons button);
+HAPI b8 input_is_button_down(buttons button);
+HAPI b8 input_is_button_up(buttons button);
+HAPI b8 input_was_button_down(buttons button);
+HAPI b8 input_was_button_up(buttons button);
 
-CHEAP_API void input_get_mouse_position(i32* x, i32* y);
-CHEAP_API void input_get_previous_mouse_position(i32* x, i32* y);
+HAPI void input_get_mouse_position(i32* x, i32* y);
+HAPI void input_get_previous_mouse_position(i32* x, i32* y);
 
 void input_process_button(buttons button, b8 pressed);
 void input_process_button_mouse_move(i16 x, i16 y);

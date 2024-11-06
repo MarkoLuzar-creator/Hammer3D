@@ -10,15 +10,15 @@ enum
     DARRAY_FIELD_LENGTH
 };
 
-CHEAP_API void* _darray_create(u64 length, u64 stride);
-CHEAP_API void _darray_destroy(void* array);
-CHEAP_API u64 _darray_field_get(void* array, u64 field);
-CHEAP_API void _darray_field_set(void* array, u64 field, u64 value);
-CHEAP_API void* _darray_resize(void* array);
-CHEAP_API void* _darray_push(void* array, const void* value_ptr);
-CHEAP_API void _darray_pop(void* array, void* dest);
-CHEAP_API void* _darray_pop_at(void* array, u64 index, void* dest);
-CHEAP_API void* _darray_insert_at(void* array, u64 index, void* value_ptr);
+HAPI void* _darray_create(u64 length, u64 stride);
+HAPI void _darray_destroy(void* array);
+HAPI u64 _darray_field_get(void* array, u64 field);
+HAPI void _darray_field_set(void* array, u64 field, u64 value);
+HAPI void* _darray_resize(void* array);
+HAPI void* _darray_push(void* array, const void* value_ptr);
+HAPI void _darray_pop(void* array, void* dest);
+HAPI void* _darray_pop_at(void* array, u64 index, void* dest);
+HAPI void* _darray_insert_at(void* array, u64 index, void* value_ptr);
 
 #define DARRAY_DEFAULT_CAPACITY 1
 #define DARRAY_RESIZE_FACTOR 2

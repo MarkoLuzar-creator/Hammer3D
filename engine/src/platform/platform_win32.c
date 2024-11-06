@@ -31,7 +31,7 @@
             }
             case WM_CLOSE:
             {
-                CHEAP_INFO("close");
+                HINFO("close");
                 return 0;
             }
             case WM_DESTROY:
@@ -127,7 +127,7 @@
         if(!RegisterClassA(&wc))
         {
             MessageBoxA(0, "Window registration failed!", "Error", MB_ICONEXCLAMATION | MB_OK);
-            CHEAP_FATAL("Window registration failed!");
+            HFATAL("Window registration failed!");
             return FALSE;
         }
 
@@ -150,7 +150,7 @@
         if (!handle)
         {
             MessageBoxA(NULL, "Window creation failed!", "Error!", MB_ICONEXCLAMATION | MB_OK);
-            CHEAP_FATAL("Window creation failed!");
+            HFATAL("Window creation failed!");
             return FALSE;
         } 
 

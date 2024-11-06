@@ -12,25 +12,25 @@ int main()
 
     if (!create_game(&game_inst))
     {
-        CHEAP_FATAL("Could not create game!");
+        HFATAL("Could not create game!");
         return 1;
     }
 
     if (!game_inst.render || !game_inst.update || !game_inst.initialize || !game_inst.on_resize || !game_inst.update)
     {
-        CHEAP_FATAL("The game's function pointers must be assigned!");
+        HFATAL("The game's function pointers must be assigned!");
         return 1;
     }
 
     if(!application_create(&game_inst))
     {
-        CHEAP_INFO("Application failed to create!");
+        HINFO("Application failed to create!");
         return 1;
     }
 
     if(!application_run())
     {
-        CHEAP_INFO("Application did not shutdown sucessfully!");
+        HINFO("Application did not shutdown sucessfully!");
         return 1;
     }
     

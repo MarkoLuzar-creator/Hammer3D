@@ -26,9 +26,9 @@ void event_initialize();
 void event_shutdown();
 
 typedef b8 (*PFN_on_event)(u16 code, void* sender, void* listener_inst, event_context data);
-CHEAP_API b8 event_register(u16 code, void* listener, PFN_on_event on_event);
-CHEAP_API b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
-CHEAP_API b8 event_fire(u16 code, void* sender, event_context context);
+HAPI b8 event_register(u16 code, void* listener, PFN_on_event on_event);
+HAPI b8 event_unregister(u16 code, void* listener, PFN_on_event on_event);
+HAPI b8 event_fire(u16 code, void* sender, event_context context);
 
 typedef enum system_event_code
 {

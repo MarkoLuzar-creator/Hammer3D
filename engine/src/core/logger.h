@@ -1,8 +1,7 @@
 #pragma once
-
 #include "defines.h"
 
-typedef enum
+enum LogLevels 
 {
     LOG_LEVEL_FATAL,
     LOG_LEVEL_ERROR,
@@ -10,58 +9,50 @@ typedef enum
     LOG_LEVEL_INFO,
     LOG_LEVEL_DEBUG,
     LOG_LEVEL_TRACE,
-} log_levels;
+};
 
-CHEAP_API void logger_initialize();
-CHEAP_API void logger_shutdown();
-
-CHEAP_API void log_output(log_levels level, const char* msg, ...);
+HAPI b8 LoggerInitialize();
+HAPI void LoggerShutdown();
+HAPI void LoggerPrint(enum LogLevels logLevel, const char* msg, ...);
 
 #define LOG_FATAL_ENABLED 1
 #define LOG_ERROR_ENABLED 1
 #define LOG_WARN_ENABLED 1
 #define LOG_INFO_ENABLED 1
-
-#ifdef _DEBUG
-    #define LOG_DEBUG_ENABLED 1
-    #define LOG_TRACE_ENABLED 1
+#ifdef DEBUG
+#define LOG_DEBUG_ENABLED 1
+#define LOG_TRACE_ENABLED 1
 #else 
-    #define LOG_DEBUG_ENABLED 0
-    #define LOG_TRACE_ENABLED 0
+#define LOG_DEBUG_ENABLED 0
+#define LOG_TRACE_ENABLED 0
 #endif
-
 #if LOG_FATAL_ENABLED == 1
-    #define CHEAP_FATAL(msg, ...) log_output(LOG_LEVEL_FATAL, msg, ##__VA_ARGS__);
+#define HFATAL(msg, ...) LoggerPrint(LOG_LEVEL_FATAL, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_FATAL(msg, ...);
+#define HFATAL(msg, ...);
 #endif
-
 #if LOG_ERROR_ENABLED == 1
-    #define CHEAP_ERROR(msg, ...) log_output(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
+#define CHEAP_ERROR(msg, ...) LoggerPrint(LOG_LEVEL_ERROR, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_ERROR(msg, ...);
+#define CHEAP_ERROR(msg, ...);
 #endif
-
 #if LOG_WARN_ENABLED == 1
-    #define CHEAP_WARN(msg, ...) log_output(LOG_LEVEL_WARN, msg, ##__VA_ARGS__);
+#define HWARN(msg, ...) LoggerPrint(LOG_LEVEL_WARN, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_WARN(msg, ...);
+#define HWARN(msg, ...);
 #endif
-
 #if LOG_INFO_ENABLED == 1
-    #define CHEAP_INFO(msg, ...) log_output(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
+#define HINFO(msg, ...) LoggerPrint(LOG_LEVEL_INFO, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_INFO(msg, ...);
+#define HINFO(msg, ...);
 #endif
-
 #if LOG_DEBUG_ENABLED == 1
-    #define CHEAP_DEBUG(msg, ...) log_output(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
+#define HDEBUG(msg, ...) LoggerPrint(LOG_LEVEL_DEBUG, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_DEBUG(msg, ...);
+#define HDEBUG(msg, ...);
 #endif
-
 #if LOG_TRACE_ENABLED == 1
-    #define CHEAP_TRACE(msg, ...) log_output(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
+#define HTRACE(msg, ...) LoggerPrint(LOG_LEVEL_TRACE, msg, ##__VA_ARGS__);
 #else
-    #define CHEAP_TRACE(msg, ...);
+#define HTRACE(msg, ...);
 #endif

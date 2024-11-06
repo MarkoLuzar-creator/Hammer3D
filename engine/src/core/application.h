@@ -13,5 +13,5 @@ typedef struct
 
 struct game;
 
-CHEAP_API b8 application_create(struct game* game_inst);
-CHEAP_API b8 application_run();
+HAPI b8 application_create(struct game* game_inst);
+HAPI b8 application_run();
