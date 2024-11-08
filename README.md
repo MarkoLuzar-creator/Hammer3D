@@ -1,1 +1,1 @@
-![My Project Logo](logo.png)
+![My Project Logo](Hammer3DLogo2000x2000.png)
